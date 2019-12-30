@@ -16,7 +16,7 @@ import io
 
 from pygments.formatter import Formatter
 from pygments.token import Token, Text, STANDARD_TYPES
-from pygments.util import get_bool_opt, get_int_opt, get_list_opt, bytes
+from pygments.util import get_bool_opt, get_int_opt, get_list_opt
 
 try:
     import ctags

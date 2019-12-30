@@ -1,4 +1,4 @@
-#!env/bin/python
+#!/usr/bin/env python3
 from i2p2www import app
 import os
 

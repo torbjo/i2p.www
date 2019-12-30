@@ -149,6 +149,10 @@ def get_locale():
     # header the browser transmits. The best match wins.
     return request.accept_languages.best_match(SUPPORTED_LANGS)
 
+# TBL-FIXME
+# Had to disable this when porting to python3.
+# Babel no longer has the domainselector decorator.
+"""
 @babel.domainselector
 def get_domains():
     domains = []
@@ -163,6 +167,7 @@ def get_domains():
     # up-to-date (in case of any common translation strings).
     domains.append(DEFAULT_GETTEXT_DOMAIN)
     return domains
+"""
 
 
 ##########################

@@ -1,4 +1,3 @@
-import ctags
 from flask import g, request, safe_join, url_for
 import os.path
 from urllib.parse import urlsplit, urlunsplit
@@ -46,7 +45,13 @@ BROWSER_FILE = 'i2pbrowser-install'
 
 @app.context_processor
 def utility_processor():
-    _ctags = ctags.CTags(os.path.join(SPEC_DIR, 'spectags'))
+    # TBL-FIXME
+    # Had to disable ctags when porting to python3.
+    # This extension does not work with Python3. And the upstream
+    # project seems abandoned.
+    # TODO: reimplement in python if needed.
+    # Q: Where on the webpage is this used?
+#    _ctags = ctags.CTags(os.path.join(SPEC_DIR, 'spectags'))
     kinds = {
         't': 'type',
         's': 'struct',
@@ -85,6 +90,7 @@ def utility_processor():
         return url
 
     def get_ctags_url(value):
+#        print ('D: get_ctags_url():', value)
         filename, kind = _lookup_ctag(value)
         # Handle message types
         if not kind and value.endswith('Message'):
@@ -99,11 +105,16 @@ def utility_processor():
             return ''
 
     def _lookup_ctag(token):
+        #print ('XXX: ctags lookup for:', token)
+        return None, None
+        # TBL-FIXME
+        """
         entry = ctags.TagEntry()
         if _ctags.find(entry, token, 0):
             return entry['file'], entry['kind']
         else:
             return None, None
+        """
 
     # Shorthand for getting a language-specific url
     def get_url_with_lang(endpoint, **args):
